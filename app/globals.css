@@ -1,0 +1,668 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* AUREXIA LEGENDS - Epic Dark Fantasy Theme */
+  --background: oklch(0.05 0.02 260);
+  --foreground: oklch(0.95 0.01 60);
+  --card: oklch(0.08 0.025 255);
+  --card-foreground: oklch(0.95 0.01 60);
+  --popover: oklch(0.08 0.025 255);
+  --popover-foreground: oklch(0.95 0.01 60);
+  --primary: oklch(0.75 0.18 55);
+  --primary-foreground: oklch(0.08 0.02 260);
+  --secondary: oklch(0.12 0.03 255);
+  --secondary-foreground: oklch(0.85 0.02 60);
+  --muted: oklch(0.15 0.025 250);
+  --muted-foreground: oklch(0.55 0.03 250);
+  --accent: oklch(0.55 0.25 200);
+  --accent-foreground: oklch(0.95 0.01 60);
+  --destructive: oklch(0.55 0.25 25);
+  --destructive-foreground: oklch(0.95 0.01 60);
+  --border: oklch(0.20 0.04 250);
+  --input: oklch(0.12 0.03 255);
+  --ring: oklch(0.75 0.18 55);
+  --radius: 0.5rem;
+
+  /* Chart colors */
+  --chart-1: oklch(0.75 0.18 55);
+  --chart-2: oklch(0.55 0.25 200);
+  --chart-3: oklch(0.55 0.25 25);
+  --chart-4: oklch(0.55 0.22 290);
+  --chart-5: oklch(0.55 0.22 150);
+
+  /* Legend tokens - Epic color palette */
+  --legend-gold: oklch(0.75 0.18 55);
+  --legend-cyan: oklch(0.65 0.20 200);
+  --legend-crimson: oklch(0.55 0.28 25);
+  --legend-violet: oklch(0.55 0.25 290);
+  --legend-emerald: oklch(0.55 0.22 150);
+  --legend-ice: oklch(0.80 0.12 220);
+  --legend-fire: oklch(0.65 0.28 40);
+  --legend-void: oklch(0.40 0.30 300);
+  --glow-gold: oklch(0.75 0.18 55 / 0.5);
+  --glow-cyan: oklch(0.65 0.20 200 / 0.4);
+  --glass: oklch(0.10 0.03 255 / 0.7);
+  --glass-border: oklch(0.75 0.18 55 / 0.2);
+
+  --sidebar: oklch(0.06 0.025 258);
+  --sidebar-foreground: oklch(0.95 0.01 60);
+  --sidebar-primary: oklch(0.75 0.18 55);
+  --sidebar-primary-foreground: oklch(0.08 0.02 260);
+  --sidebar-accent: oklch(0.12 0.03 255);
+  --sidebar-accent-foreground: oklch(0.85 0.02 60);
+  --sidebar-border: oklch(0.20 0.04 250);
+  --sidebar-ring: oklch(0.75 0.18 55);
+}
+
+@theme inline {
+  --font-sans: var(--font-cinzel), 'Cinzel', serif;
+  --font-mono: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.06 0.025 258);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, oklch(0.75 0.18 55) 0%, oklch(0.55 0.25 200) 100%);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.80 0.20 55);
+  }
+}
+
+/* ==========================================
+   ARENA BACKGROUND SYSTEM
+   ========================================== */
+
+.arena-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.20 0.15 55 / 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, oklch(0.15 0.20 200 / 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 30% at 20% 80%, oklch(0.12 0.25 290 / 0.15) 0%, transparent 35%),
+    oklch(0.05 0.02 260);
+  pointer-events: none;
+}
+
+/* ==========================================
+   CHAMPION CARD SYSTEM
+   ========================================== */
+
+.champion-card {
+  position: relative;
+  background: linear-gradient(180deg, oklch(0.12 0.04 250) 0%, oklch(0.06 0.03 260) 100%);
+  border: 2px solid oklch(0.75 0.18 55 / 0.3);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.champion-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    oklch(0.75 0.18 55 / 0.05) 50%,
+    oklch(0.75 0.18 55 / 0.15) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.champion-card:hover {
+  border-color: oklch(0.75 0.18 55 / 0.8);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 40px oklch(0.05 0.02 260 / 0.8),
+    0 0 30px oklch(0.75 0.18 55 / 0.3),
+    inset 0 0 60px oklch(0.75 0.18 55 / 0.05);
+}
+
+.champion-card:hover::before {
+  opacity: 1;
+}
+
+/* Champion portrait frame */
+.champion-frame {
+  position: relative;
+  border: 3px solid transparent;
+  background: 
+    linear-gradient(oklch(0.08 0.025 255), oklch(0.08 0.025 255)) padding-box,
+    linear-gradient(135deg, oklch(0.75 0.18 55), oklch(0.55 0.25 200), oklch(0.75 0.18 55)) border-box;
+}
+
+/* Rarity borders */
+.rarity-legendary {
+  border-image: linear-gradient(135deg, oklch(0.80 0.20 55), oklch(0.65 0.28 40), oklch(0.80 0.20 55)) 1;
+  box-shadow: 0 0 25px oklch(0.75 0.18 55 / 0.5);
+}
+
+.rarity-epic {
+  border-image: linear-gradient(135deg, oklch(0.55 0.25 290), oklch(0.65 0.20 310), oklch(0.55 0.25 290)) 1;
+  box-shadow: 0 0 20px oklch(0.55 0.25 290 / 0.4);
+}
+
+.rarity-rare {
+  border-image: linear-gradient(135deg, oklch(0.55 0.25 200), oklch(0.65 0.20 220), oklch(0.55 0.25 200)) 1;
+  box-shadow: 0 0 15px oklch(0.55 0.25 200 / 0.3);
+}
+
+.rarity-common {
+  border-color: oklch(0.40 0.10 250);
+}
+
+/* ==========================================
+   POWER STAT BARS
+   ========================================== */
+
+.power-bar {
+  position: relative;
+  height: 6px;
+  background: oklch(0.15 0.02 250);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.power-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.power-attack { background: linear-gradient(90deg, oklch(0.55 0.28 25) 0%, oklch(0.65 0.28 40) 100%); }
+.power-defense { background: linear-gradient(90deg, oklch(0.55 0.25 200) 0%, oklch(0.65 0.20 220) 100%); }
+.power-magic { background: linear-gradient(90deg, oklch(0.55 0.25 290) 0%, oklch(0.65 0.22 310) 100%); }
+.power-speed { background: linear-gradient(90deg, oklch(0.55 0.22 150) 0%, oklch(0.65 0.20 170) 100%); }
+
+/* ==========================================
+   BATTLE ARENA UI
+   ========================================== */
+
+.battle-frame {
+  position: relative;
+  background: linear-gradient(180deg, oklch(0.08 0.03 255 / 0.9) 0%, oklch(0.05 0.02 260 / 0.95) 100%);
+  border: 2px solid oklch(0.75 0.18 55 / 0.4);
+  backdrop-filter: blur(20px);
+}
+
+.battle-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    oklch(0.75 0.18 55), 
+    oklch(0.55 0.25 200), 
+    oklch(0.75 0.18 55), 
+    transparent
+  );
+}
+
+/* Health bar */
+.health-bar {
+  height: 12px;
+  background: oklch(0.15 0.02 250);
+  border: 1px solid oklch(0.30 0.05 250);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(180deg, oklch(0.55 0.22 150) 0%, oklch(0.45 0.22 150) 50%, oklch(0.55 0.22 150) 100%);
+  transition: width 0.3s ease;
+  box-shadow: inset 0 1px 0 oklch(0.70 0.20 150 / 0.5);
+}
+
+.health-fill.low {
+  background: linear-gradient(180deg, oklch(0.55 0.28 25) 0%, oklch(0.45 0.28 25) 50%, oklch(0.55 0.28 25) 100%);
+}
+
+/* Mana bar */
+.mana-bar {
+  height: 8px;
+  background: oklch(0.15 0.02 250);
+  border: 1px solid oklch(0.30 0.05 250);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.mana-fill {
+  height: 100%;
+  background: linear-gradient(180deg, oklch(0.55 0.25 200) 0%, oklch(0.45 0.25 200) 50%, oklch(0.55 0.25 200) 100%);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================
+   LEGENDARY GLOW EFFECTS
+   ========================================== */
+
+.glow-gold {
+  box-shadow: 0 0 20px var(--glow-gold), 0 0 40px var(--glow-gold);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 10px oklch(0.75 0.18 55 / 0.8), 0 0 30px oklch(0.75 0.18 55 / 0.5);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px oklch(0.65 0.20 200 / 0.8), 0 0 30px oklch(0.65 0.20 200 / 0.5);
+}
+
+/* ==========================================
+   ANIMATED ELEMENTS
+   ========================================== */
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px oklch(0.75 0.18 55 / 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 40px oklch(0.75 0.18 55 / 0.7), 0 0 60px oklch(0.75 0.18 55 / 0.3);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    90deg,
+    oklch(0.75 0.18 55),
+    oklch(0.55 0.25 200),
+    oklch(0.55 0.25 290),
+    oklch(0.75 0.18 55)
+  );
+  background-size: 300% 100%;
+  animation: border-flow 4s linear infinite;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@keyframes float-champion {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float-champion 4s ease-in-out infinite;
+}
+
+/* Battle ready animation */
+@keyframes battle-ready {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+.battle-ready {
+  animation: battle-ready 1.5s ease-in-out infinite;
+}
+
+/* Victory burst */
+@keyframes victory-burst {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Skill cooldown */
+@keyframes skill-cooldown {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0); }
+}
+
+/* ==========================================
+   GLASS MORPHISM
+   ========================================== */
+
+.glass-panel {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ==========================================
+   BUTTON STYLES
+   ========================================== */
+
+.btn-legendary {
+  position: relative;
+  background: linear-gradient(135deg, oklch(0.70 0.18 55) 0%, oklch(0.55 0.20 45) 100%);
+  border: 2px solid oklch(0.80 0.15 55);
+  color: oklch(0.08 0.02 260);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-legendary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-legendary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px oklch(0.75 0.18 55 / 0.4);
+}
+
+.btn-legendary:hover::before {
+  left: 100%;
+}
+
+.btn-arena {
+  background: linear-gradient(135deg, oklch(0.12 0.04 255) 0%, oklch(0.08 0.03 260) 100%);
+  border: 1px solid oklch(0.55 0.25 200 / 0.5);
+  color: oklch(0.55 0.25 200);
+  transition: all 0.3s ease;
+}
+
+.btn-arena:hover {
+  background: oklch(0.55 0.25 200);
+  color: oklch(0.08 0.02 260);
+  box-shadow: 0 0 20px oklch(0.55 0.25 200 / 0.4);
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+.text-gold { color: oklch(0.75 0.18 55); }
+.text-cyan { color: oklch(0.65 0.20 200); }
+.text-crimson { color: oklch(0.55 0.28 25); }
+.text-violet { color: oklch(0.55 0.25 290); }
+.text-emerald { color: oklch(0.55 0.22 150); }
+.text-ice { color: oklch(0.80 0.12 220); }
+.text-fire { color: oklch(0.65 0.28 40); }
+
+.bg-gold { background-color: oklch(0.75 0.18 55); }
+.bg-cyan { background-color: oklch(0.65 0.20 200); }
+.bg-crimson { background-color: oklch(0.55 0.28 25); }
+.bg-violet { background-color: oklch(0.55 0.25 290); }
+.bg-emerald { background-color: oklch(0.55 0.22 150); }
+
+/* ==========================================
+   RESPONSIVE CHAMPION GRID
+   ========================================== */
+
+.champion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .champion-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .champion-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* ==========================================
+   MATCH QUEUE ANIMATIONS
+   ========================================== */
+
+@keyframes queue-pulse {
+  0%, 100% { 
+    border-color: oklch(0.55 0.25 200 / 0.3);
+    box-shadow: 0 0 0 0 oklch(0.55 0.25 200 / 0.4);
+  }
+  50% { 
+    border-color: oklch(0.55 0.25 200);
+    box-shadow: 0 0 0 10px oklch(0.55 0.25 200 / 0);
+  }
+}
+
+.queue-searching {
+  animation: queue-pulse 2s ease-in-out infinite;
+}
+
+@keyframes countdown-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.countdown-active {
+  animation: countdown-pulse 1s ease-in-out infinite;
+}
+
+/* ==========================================
+   WALLET & TRANSACTION UI
+   ========================================== */
+
+.wallet-card {
+  background: linear-gradient(135deg, oklch(0.10 0.04 255 / 0.9) 0%, oklch(0.06 0.03 260 / 0.95) 100%);
+  border: 1px solid oklch(0.75 0.18 55 / 0.3);
+  backdrop-filter: blur(20px);
+}
+
+.tx-success { border-left: 3px solid oklch(0.55 0.22 150); }
+.tx-pending { border-left: 3px solid oklch(0.75 0.18 55); }
+.tx-failed { border-left: 3px solid oklch(0.55 0.28 25); }
+
+/* ==========================================
+   LOADING STATES
+   ========================================== */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.12 0.03 255) 25%,
+    oklch(0.20 0.05 250) 50%,
+    oklch(0.12 0.03 255) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ==========================================
+   HOLOGRAM EFFECTS (Enhanced)
+   ========================================== */
+
+.hologram-card {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    oklch(0.12 0.04 250 / 0.8) 0%,
+    oklch(0.08 0.03 260 / 0.6) 50%,
+    oklch(0.10 0.05 290 / 0.7) 100%
+  );
+  border: 1px solid oklch(0.75 0.18 55 / 0.3);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  overflow: hidden;
+}
+
+.hologram-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    oklch(0.75 0.18 55 / 0.05) 25%,
+    oklch(0.55 0.25 200 / 0.08) 50%,
+    oklch(0.55 0.25 290 / 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 400% 400%;
+  animation: hologram-shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hologram-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hologram-text {
+  background: linear-gradient(
+    90deg,
+    oklch(0.75 0.18 55) 0%,
+    oklch(0.55 0.25 200) 50%,
+    oklch(0.75 0.18 55) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-flow 4s linear infinite;
+}
+
+@keyframes text-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Scan lines */
+.scan-lines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    oklch(0.75 0.18 55 / 0.01) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Energy pulse */
+@keyframes energy-pulse {
+  0% { box-shadow: 0 0 0 0 oklch(0.75 0.18 55 / 0.7); }
+  70% { box-shadow: 0 0 0 15px oklch(0.75 0.18 55 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(0.75 0.18 55 / 0); }
+}
+
+.energy-pulse {
+  animation: energy-pulse 2s infinite;
+}
+
+/* Cyber button */
+.cyber-btn {
+  position: relative;
+  background: linear-gradient(135deg, oklch(0.75 0.18 55) 0%, oklch(0.55 0.20 45) 100%);
+  border: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.cyber-btn:hover::before {
+  left: 100%;
+}
+
+.cyber-btn:hover {
+  box-shadow: 0 0 30px oklch(0.75 0.18 55 / 0.6);
+  transform: scale(1.02);
+}
